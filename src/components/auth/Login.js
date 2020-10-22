@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -7,14 +8,20 @@ const Login = () => {
     password: ""
    });
 
+   const history = useHistory();
+
   const { email, password,  } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit = e => {
     e.preventDefault();
     console.log('SUCCESS');
+    localStorage.setItem(password, email)
+        console.log(formData);
+        alert(email + " Has logged in")
+        history.push('/')
   };
 
   return (
