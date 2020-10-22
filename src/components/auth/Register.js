@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Link } from 'react-router-dom';
-
-
+import { useHistory } from 'react-router-dom'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,14 +15,18 @@ const Register = () => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+const history = useHistory();
+
   const onSubmit = (e) => {
     e.preventDefault();
-    if (password !== password2) {
+    
+      if (password !== password2) {
       console.log("Passwords do not match");
     } else {
         localStorage.setItem(name, email)
         console.log(formData);
         alert(email + " Has logged in")
+        history.push('/')
     }
   };
 
